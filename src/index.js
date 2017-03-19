@@ -21,9 +21,19 @@ module.exports = ({ config }) => {
             env: { node: true },
             rules: {
               'vue/jsx-uses-vars': 2,
-            }
+            },
           },
         },
       }));
+  }
+
+  if (config.plugins.has('stylelint')) {
+    config.plugin('stylelint').inject((Plugin, options) => {
+      return new Plugin(merge(options[0], {
+        config: {
+          processors: ['stylelint-processor-html'],
+        },
+      }));
+    });
   }
 };
