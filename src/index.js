@@ -28,10 +28,12 @@ module.exports = ({ config }) => {
   }
 
   if (config.plugins.has('stylelint')) {
+    const STYLELINT_HTML_PROCESSOR = require.resolve('stylelint-processor-html');
     config.plugin('stylelint').inject((Plugin, options) => {
       return new Plugin(merge(options[0], {
+        files: ['**/*.vue'],
         config: {
-          processors: ['stylelint-processor-html'],
+          processors: [STYLELINT_HTML_PROCESSOR],
         },
       }));
     });
