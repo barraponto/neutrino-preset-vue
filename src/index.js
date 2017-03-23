@@ -35,6 +35,10 @@ module.exports = ({ config }) => {
         config: {
           processors: [STYLELINT_HTML_PROCESSOR],
         },
+        rules: {
+          // allows empty <style> in vue components
+          "no-empty-source": null
+        },
       }));
     });
   }
