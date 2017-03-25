@@ -4,8 +4,8 @@
   "description": "Neutrino preset adding Vue.js support.",
   "main": "src/index.js",
   "author": "Capi Etheriel <barraponto@gmail.com> (https://barraponto.blog.br)",
-  "repository": "https://github.com/barraponto/neutrino-preset-stylelint",
-  "bugs": "https://github.com/barraponto/neutrino-preset-stylelint/issues",
+  "repository": "https://github.com/barraponto/neutrino-preset-vue",
+  "bugs": "https://github.com/barraponto/neutrino-preset-vue/issues",
   "license": "GPL-3.0",
   "peerDependencies": {
     "neutrino": "^4.0.0"
