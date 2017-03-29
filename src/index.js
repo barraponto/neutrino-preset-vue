@@ -14,6 +14,7 @@ module.exports = ({ config }) => {
     config.module
       .rule('lint')
       .test(conditions)
+      .use('eslint')
       .tap(options => merge(options, {
           baseConfig: {
             plugins: ['vue'],
