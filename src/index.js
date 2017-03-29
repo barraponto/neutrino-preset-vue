@@ -8,6 +8,15 @@ module.exports = ({ config }) => {
     .use('vue')
     .loader(VUE_LOADER);
 
+  if (config.module.rules.has('style') && config.module.rule('style').uses.has('postcss')) {
+    config.module
+      .rule('vue')
+      .use('vue')
+      .tap(options => ({
+        postcss: config.module.rule('style').use('postcss').get('options')
+      }))
+  }
+
   if (config.module.rules.has('lint')) {
     // ensure conditions is an array of original values plus our own regex
     const conditions = arrify(config.module.rule('lint').get('test')).concat([/\.vue$/]);
