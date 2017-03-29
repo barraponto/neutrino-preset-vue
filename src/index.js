@@ -1,12 +1,11 @@
 const arrify = require('arrify');
 const merge = require('deepmerge');
-const VUE_LOADER = require.resolve('vue-loader');
 
 module.exports = ({ config }) => {
   config.module.rule('vue')
     .test(/\.vue$/)
     .use('vue')
-    .loader(VUE_LOADER);
+    .loader(require.resolve('vue-loader'));
 
   if (config.module.rules.has('style') && config.module.rule('style').uses.has('postcss')) {
     const opts = config.module.rule('style').use('postcss').get('options');
@@ -14,9 +13,9 @@ module.exports = ({ config }) => {
       config.module
         .rule('vue')
         .use('vue')
-        .tap(options => ({
+        .tap(options => merge(options, {
           postcss: opts
-        }))
+        }));
     }
   }
 
@@ -28,14 +27,14 @@ module.exports = ({ config }) => {
       .test(conditions)
       .use('eslint')
       .tap(options => merge(options, {
-          baseConfig: {
-            plugins: ['vue'],
-            env: { node: true },
-            rules: {
-              'vue/jsx-uses-vars': 2,
-            },
-          },
-        }));
+        baseConfig: {
+          plugins: ['vue'],
+          env: { node: true },
+          rules: {
+            'vue/jsx-uses-vars': 2
+          }
+        }
+      }));
   }
 
   if (config.plugins.has('stylelint')) {
@@ -48,9 +47,9 @@ module.exports = ({ config }) => {
             processors: [STYLELINT_HTML_PROCESSOR],
             rules: {
               // allows empty <style> in vue components
-              "no-empty-source": null
-            },
-          },
+              'no-empty-source': null
+            }
+          }
         })
       ]);
   }
