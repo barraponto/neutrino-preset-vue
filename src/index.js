@@ -1,20 +1,21 @@
 const arrify = require('arrify');
 const merge = require('deepmerge');
 
-module.exports = ({ config }) => {
+module.exports = ({ config }, options) => {
   config.module.rule('vue')
     .test(/\.vue$/)
     .use('vue')
-    .loader(require.resolve('vue-loader'));
+    .loader(require.resolve('vue-loader'))
+    .options(options);
 
   if (config.module.rules.has('style') && config.module.rule('style').uses.has('postcss')) {
-    const opts = config.module.rule('style').use('postcss').get('options');
-    if (Object.getOwnPropertyNames(opts).length) { // check if object is not empty
+    const postcssLoaderOptions = config.module.rule('style').use('postcss').get('options');
+    if (Object.getOwnPropertyNames(postcssLoaderOptions).length) { // check if object is not empty
       config.module
         .rule('vue')
         .use('vue')
-        .tap(options => merge(options, {
-          postcss: opts
+        .tap(vueLoaderOptions => merge(vueLoaderOptions, {
+          postcss: postcssLoaderOptions
         }));
     }
   }
