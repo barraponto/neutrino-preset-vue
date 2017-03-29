@@ -9,12 +9,15 @@ module.exports = ({ config }) => {
     .loader(VUE_LOADER);
 
   if (config.module.rules.has('style') && config.module.rule('style').uses.has('postcss')) {
-    config.module
-      .rule('vue')
-      .use('vue')
-      .tap(options => ({
-        postcss: config.module.rule('style').use('postcss').get('options')
-      }))
+    const opts = config.module.rule('style').use('postcss').get('options');
+    if (Object.getOwnPropertyNames(opts).length) { // check if object is not empty
+      config.module
+        .rule('vue')
+        .use('vue')
+        .tap(options => ({
+          postcss: opts
+        }))
+    }
   }
 
   if (config.module.rules.has('lint')) {
