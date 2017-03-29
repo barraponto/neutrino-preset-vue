@@ -1,5 +1,7 @@
 # Neutrino Vue preset
-[![NPM version][npm-image]][npm-url] [![NPM downloads][npm-downloads]][npm-url] [![Join Slack][slack-image]][slack-url]
+[![NPM version][npm-image]][npm-url] [![NPM downloads][npm-downloads]][npm-url]
+[![Join Slack][slack-image]][slack-url]
+
 `neutrino-preset-vue` is a Neutrino preset that adds basic support for
 [Vue components][vuejs].
 
@@ -10,8 +12,8 @@ Install this preset to your development dependencies, then set it in
 something to give it an entry point.
 
 ```json
-  "config": {
-    "presets": [
+  "neutrino": {
+    "use": [
       "neutrino-preset-web",
       "neutrino-preset-vue"
     ]
@@ -24,25 +26,10 @@ this preset will add eslint plugin and rules for Vue components.
 If you're using `neutrino-preset-stylelint` or any preset based on it,
 this preset will add support for `<style>` tags in Vue components.
 
-## Known Issues
+## Neutrino 4
 
-**HOWEVER**, due to limitations on Neutrino v4 api, if you're using any preset
-that extends `neutrino-preset-stylelint` (such as
-`neutrino-preset-stylelint-standard`), you have to replicate the extension in 
-`package.json` or `stylelint.config.js`.
-
-For example, supporting `neutrino-preset-stylelint-standard` requires writing
-in `package.json`:
-
-```json
-"stylelint": {
-  "extends": "stylelint-config-standard"
-},
-```
-
-## To Do
-
-- [ ] Support Neutrino 5.
+Neutrino v4 is supported by the earlier release of this preset.
+Please consider updating to Neutrino 5.
 
 [vuejs]: https://vuejs.org/v2/guide/components.html
 [npm-image]: https://img.shields.io/npm/v/neutrino-preset-vue.svg
