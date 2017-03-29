@@ -3,10 +3,10 @@ const merge = require('deepmerge');
 const VUE_LOADER = require.resolve('vue-loader');
 
 module.exports = ({ config }) => {
-  config.module
-    .rule('vue')
+  config.module.rule('vue')
     .test(/\.vue$/)
-    .loader('vue', VUE_LOADER);
+    .use('vue')
+    .loader(VUE_LOADER);
 
   if (config.module.rules.has('lint')) {
     // ensure conditions is an array of original values plus our own regex
@@ -14,8 +14,7 @@ module.exports = ({ config }) => {
     config.module
       .rule('lint')
       .test(conditions)
-      .loader('eslint', props => merge(props, {
-        options: {
+      .tap(options => merge(options, {
           baseConfig: {
             plugins: ['vue'],
             env: { node: true },
@@ -23,23 +22,23 @@ module.exports = ({ config }) => {
               'vue/jsx-uses-vars': 2,
             },
           },
-        },
-      }));
+        }));
   }
 
   if (config.plugins.has('stylelint')) {
     const STYLELINT_HTML_PROCESSOR = require.resolve('stylelint-processor-html');
-    config.plugin('stylelint').inject((Plugin, options) => {
-      return new Plugin(merge(options[0], {
-        files: ['**/*.vue'],
-        config: {
-          processors: [STYLELINT_HTML_PROCESSOR],
-          rules: {
-            // allows empty <style> in vue components
-            "no-empty-source": null
+    config.plugin('stylelint')
+      .tap(args => [
+        merge(args[0], {
+          files: ['**/*.vue'],
+          config: {
+            processors: [STYLELINT_HTML_PROCESSOR],
+            rules: {
+              // allows empty <style> in vue components
+              "no-empty-source": null
+            },
           },
-        },
-      }));
-    });
+        })
+      ]);
   }
 };
