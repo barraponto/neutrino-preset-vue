@@ -16,12 +16,10 @@ module.exports = ({ config }) => {
       .test(conditions)
       .loader('eslint', props => merge(props, {
         options: {
-          baseConfig: {
-            plugins: ['vue'],
-            env: { node: true },
-            rules: {
-              'vue/jsx-uses-vars': 2,
-            },
+          plugins: ['vue'],
+          env: { node: true },
+          rules: {
+            'vue/jsx-uses-vars': 2,
           },
         },
       }));
