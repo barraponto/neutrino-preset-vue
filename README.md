@@ -1,4 +1,6 @@
 # Neutrino Vue preset
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/barraponto/neutrino-preset-vue.svg)](https://greenkeeper.io/)
 [![NPM version][npm-image]][npm-url] [![NPM downloads][npm-downloads]][npm-url]
 [![Join Slack][slack-image]][slack-url]
 
