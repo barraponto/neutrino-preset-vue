@@ -59,12 +59,10 @@ module.exports = (neutrino, options) => {
       .test(conditions)
       .use('eslint')
         .tap(options => merge(options, {
-          baseConfig: {
-            plugins: ['vue'],
-            env: { node: true },
-            rules: {
-              'vue/jsx-uses-vars': 2
-            }
+          plugins: ['vue'],
+          env: { node: true },
+          rules: {
+            'vue/jsx-uses-vars': 2
           }
         }));
   }
