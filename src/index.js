@@ -1,15 +1,20 @@
 const arrify = require('arrify');
 const merge = require('deepmerge');
 
+const LOADER_EXTENSIONS = /\.vue$/;
+
 module.exports = ({ config }, options) => {
+  const styleRule = config.module.rules.get('style');
+  const lintRule = config.module.rules.get('lint');
+
   config.module.rule('vue')
-    .test(/\.vue$/)
+    .test(LOADER_EXTENSIONS)
     .use('vue')
     .loader(require.resolve('vue-loader'))
     .options(options);
 
-  if (config.module.rules.has('style') && config.module.rule('style').uses.has('postcss')) {
-    const postcssLoaderOptions = config.module.rule('style').use('postcss').get('options');
+  if (styleRule && styleRule.uses.has('postcss')) {
+    const postcssLoaderOptions = styleRule.use('postcss').get('options');
     if (Object.getOwnPropertyNames(postcssLoaderOptions).length) { // check if object is not empty
       config.module
         .rule('vue')
@@ -20,9 +25,9 @@ module.exports = ({ config }, options) => {
     }
   }
 
-  if (config.module.rules.has('lint')) {
+  if (lintRule) {
     // ensure conditions is an array of original values plus our own regex
-    const conditions = arrify(config.module.rule('lint').get('test')).concat([/\.vue$/]);
+    const conditions = arrify(lintRule.get('test')).concat([LOADER_EXTENSIONS]);
     config.module
       .rule('lint')
       .test(conditions)
@@ -37,13 +42,12 @@ module.exports = ({ config }, options) => {
   }
 
   if (config.plugins.has('stylelint')) {
-    const STYLELINT_HTML_PROCESSOR = require.resolve('stylelint-processor-html');
     config.plugin('stylelint')
       .tap(args => [
         merge(args[0], {
           files: ['**/*.vue'],
           config: {
-            processors: [STYLELINT_HTML_PROCESSOR],
+            processors: [require.resolve('stylelint-processor-html')],
             rules: {
               // allows empty <style> in vue components
               'no-empty-source': null
