@@ -20,9 +20,9 @@ module.exports = ({ config }, options) => {
       config.module
         .rule('vue')
         .use('vue')
-        .tap(vueLoaderOptions => merge(vueLoaderOptions, {
+        .tap(vueLoaderOptions => merge({
           postcss: postcssLoaderOptions
-        }));
+        }, vueLoaderOptions));
     }
   }
 
