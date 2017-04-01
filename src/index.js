@@ -6,6 +6,7 @@ const LOADER_EXTENSIONS = /\.vue$/;
 module.exports = ({ config }, options) => {
   const styleRule = config.module.rules.get('style');
   const lintRule = config.module.rules.get('lint');
+  const compileRule = config.module.rules.get('compileRule');
 
   config.module.rule('vue')
     .test(LOADER_EXTENSIONS)
@@ -23,6 +24,21 @@ module.exports = ({ config }, options) => {
           postcss: postcssLoaderOptions
         }));
     }
+  }
+
+  if (compileRule && compileRule.uses.has('babel')) {
+    const babelOptions = compileRule.use('babel').get('options');
+    config.module
+      .rule('vue')
+      .use('vue')
+      .tap(vueLoaderOptions => merge({
+        loaders: {
+          js: {
+            loader: 'babel-loader',
+            options: babelOptions
+          }
+        }
+      }, vueLoaderOptions));
   }
 
   if (lintRule) {
