@@ -14,6 +14,8 @@ module.exports = ({ config }, options) => {
     .loader(require.resolve('vue-loader'))
     .options(options);
 
+  config.resolve.extensions.add('.vue');
+
   if (styleRule && styleRule.uses.has('postcss')) {
     const postcssLoaderOptions = styleRule.use('postcss').get('options');
     if (Object.getOwnPropertyNames(postcssLoaderOptions).length) { // check if object is not empty
