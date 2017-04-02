@@ -1,7 +1,9 @@
+const path = require('path');
 const arrify = require('arrify');
 const merge = require('deepmerge');
 
 const LOADER_EXTENSIONS = /\.vue$/;
+const MODULES = path.join(__dirname, 'node_modules');
 
 module.exports = ({ config }, options) => {
   const styleRule = config.module.rules.get('style');
@@ -74,4 +76,7 @@ module.exports = ({ config }, options) => {
         })
       ]);
   }
+
+  config.resolve.modules.add(MODULES);
+  config.resolveLoader.modules.add(MODULES);
 };
