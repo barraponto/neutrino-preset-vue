@@ -8,7 +8,7 @@ const MODULES = path.join(__dirname, 'node_modules');
 module.exports = ({ config }, options) => {
   const styleRule = config.module.rules.get('style');
   const lintRule = config.module.rules.get('lint');
-  const compileRule = config.module.rules.get('compileRule');
+  const compileRule = config.module.rules.get('compile');
 
   config.module.rule('vue')
     .test(LOADER_EXTENSIONS)
