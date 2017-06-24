@@ -16,8 +16,8 @@
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.1.0",
     "eslint-plugin-prettier": "^2.1.2",
-    "neutrino": "^5.0.2",
-    "neutrino-preset-airbnb-base": "^5.0.2",
+    "neutrino": "^5.9.0",
+    "neutrino-preset-airbnb-base": "^5.9.0",
     "prettier": "^1.4.4"
   },
   "config": {
