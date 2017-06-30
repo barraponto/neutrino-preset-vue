@@ -7,9 +7,6 @@
   "repository": "https://github.com/barraponto/neutrino-preset-vue",
   "bugs": "https://github.com/barraponto/neutrino-preset-vue/issues",
   "license": "GPL-3.0",
-  "scripts": {
-    "git-cz": "git-cz"
-  },
   "peerDependencies": {
     "neutrino": "^6.1.4",
     "vue": "^2.3.4"

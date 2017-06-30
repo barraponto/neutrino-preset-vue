@@ -24,7 +24,7 @@ module.exports = ({ config }, options) => {
       config.module
         .rule('vue')
         .use('vue')
-        .tap(vueLoaderOptions => merge({
+        .tap((vueLoaderOptions = {}) => merge({
           postcss: postcssLoaderOptions
         }, vueLoaderOptions));
     }
@@ -35,7 +35,7 @@ module.exports = ({ config }, options) => {
     config.module
       .rule('vue')
       .use('vue')
-      .tap(vueLoaderOptions => merge({
+      .tap((vueLoaderOptions = {}) => merge({
         loaders: {
           js: {
             loader: 'babel-loader',
