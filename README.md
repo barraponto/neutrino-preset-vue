@@ -10,16 +10,17 @@
 ## Documentation
 
 Install this preset to your development dependencies, then set it in
-`package.json`. It should go after `neutrino-preset-web`, though it just needs
+`.neutrinorc.js`. It should go after `neutrino-preset-web`, though it just needs
 something to give it an entry point.
 
-```json
-  "neutrino": {
-    "use": [
+```js
+  module.exports = {
+    use: [
       "neutrino-preset-web",
       "neutrino-preset-vue"
-    ]
-  },
+    ],
+    ...
+  };
 ```
 
 If you're using `neutrino-preset-lint` or any preset based on it,
@@ -28,10 +29,12 @@ this preset will add eslint plugin and rules for Vue components.
 If you're using `neutrino-preset-stylelint` or any preset based on it,
 this preset will add support for `<style>` tags in Vue components.
 
-## Neutrino 4
+Just ensure the linter presets are loaded *before* this one.
 
-Neutrino v4 is supported by the earlier release of this preset.
-Please consider updating to Neutrino 5.
+## Neutrino 5
+
+Neutrino v5 is supported by the earlier (2.x) release of this preset.
+Please consider updating to Neutrino 6.
 
 [vuejs]: https://vuejs.org/v2/guide/components.html
 [npm-image]: https://img.shields.io/npm/v/neutrino-preset-vue.svg
