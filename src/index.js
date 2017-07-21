@@ -54,7 +54,7 @@ module.exports = ({ config }, options) => {
       .use('eslint')
       .tap(options => merge(options, {
         plugins: ['vue'],
-        env: { node: true },
+        envs: ['node'],
         rules: {
           'vue/jsx-uses-vars': 2
         }
