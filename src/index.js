@@ -31,7 +31,12 @@ module.exports = ({ config }, options) => {
   }
 
   if (compileRule && compileRule.uses.has('babel')) {
-    const babelOptions = compileRule.use('babel').get('options');
+    const babelOptions = merge(
+      compileRule.use('babel').get('options'),
+      {
+        plugins: [ require.resolve('babel-plugin-transform-object-rest-spread') ],
+      }
+    )
     config.module
       .rule('vue')
       .use('vue')
