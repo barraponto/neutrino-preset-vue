@@ -53,11 +53,6 @@ users can just add it to that preset through an option in `.neutrinorc.js`.
   };
 ```
 
-## Neutrino 5
-
-Neutrino v5 is supported by the earlier (2.x) release of this preset.
-Please consider updating to Neutrino 6.
-
 [vuejs]: https://vuejs.org/v2/guide/components.html
 [babel-object-rest-spread-plugin]: https://www.npmjs.com/package/babel-plugin-transform-object-rest-spread
 [npm-image]: https://img.shields.io/npm/v/neutrino-preset-vue.svg
