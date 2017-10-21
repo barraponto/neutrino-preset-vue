@@ -55,6 +55,11 @@ module.exports = ({ config }, options) => {
       .tap(options => merge(options, {
         plugins: ['vue'],
         envs: ['node'],
+        parserOptions: {
+          ecmaFeatures: {
+            jsx: true
+          }
+        },
         rules: {
           'vue/jsx-uses-vars': 2
         }
